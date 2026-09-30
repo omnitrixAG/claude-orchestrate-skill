@@ -7,7 +7,7 @@ ok(){ pass=$((pass+1)); echo "PASS  $1"; }
 bad(){ fail=$((fail+1)); echo "FAIL  $1"; }
 
 SKILLS="orchestrate orchestrator-delegation delegate-prompts tdd-protocol workflow-patterns validation-and-evidence context-and-state familiarize"
-AGENTS="implementer researcher validator"
+AGENTS="implementer researcher validator ops visual-check"
 EXCLUDED='memory-hub|linear-ops|documentation-discipline|autonomous-loops|research-first|visual-planner|interview-mode'
 PRIVATE='[Cc]hris\b|mem0|hub\.env|[Jj]abster|~/base|[Oo]bsidian|cozmos|Donna|christophergraves|[Gg]ravitas|[Dd]ucktate|[Rr]ubberduck|\bLinear\b|\bvault\b|BOX/|COZ/|openclaw|2026-0[0-9]-[0-9][0-9]'
 
@@ -46,7 +46,7 @@ if [ -f install.sh ]; then
   n=0; for s in $SKILLS; do [ -f "$T/.claude/skills/$s/SKILL.md" ] && n=$((n+1)); done
   [ $n -eq 8 ] && ok "install.sh placed all 8 skills" || bad "install.sh placed $n/8 skills"
   m=0; for a in $AGENTS; do [ -f "$T/.claude/agents/$a.md" ] && m=$((m+1)); done
-  [ $m -eq 3 ] && ok "install.sh placed all 3 agents" || bad "install.sh placed $m/3 agents"
+  [ $m -eq 5 ] && ok "install.sh placed all 5 agents" || bad "install.sh placed $m/5 agents"
   # second run must not clobber a locally-edited file without --force
   echo "local edit" >> "$T/.claude/skills/orchestrate/SKILL.md"
   HOME="$T" bash install.sh >"$T/out2.log" 2>&1

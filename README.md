@@ -38,6 +38,10 @@ Tell Claude Code to clone this repo and run its installer, and it will set the w
 | `implementer` | Scoped executor that builds one delegated task to its tests and reports a diff summary plus verbatim test output. |
 | `researcher` | Evidence gatherer that answers a specific question with cited findings, each labeled VERIFIED, INFERRED, or UNKNOWN. |
 | `validator` | Independent adversarial verifier that checks completed work against acceptance criteria and reports, never fixes. |
+| `ops` | Runs the git, gh and tracker chores a dispatch lists, stops on any failure, writes no product code. |
+| `visual-check` | Takes or opens screenshots and returns a text verdict, so images stay out of the orchestrator's context. |
+
+Every agent lists only the tools it needs. An agent without a `tools:` line loads every tool's description and the skill list into each call, which costs several times more context.
 
 ## How it fits together
 
@@ -53,7 +57,7 @@ The other skills are not invoked directly; `orchestrate` loads them by phase as 
 - Starting or resuming work with **prior state** pulls in `context-and-state`.
 - Landing in a **repo you have never seen** pulls in `familiarize` first, before any of the above.
 
-The three agents are the standing subagent definitions that `orchestrator-delegation` dispatches work to: `implementer` builds, `researcher` gathers evidence, `validator` checks.
+The five agents are the standing subagent definitions that `orchestrator-delegation` dispatches work to: `implementer` builds, `researcher` gathers evidence, `validator` checks, `ops` runs repo chores, `visual-check` looks at screenshots.
 
 ## Try it
 
@@ -69,7 +73,7 @@ Claude Code will frame the acceptance criteria, spec the behavior as failing tes
 
 ```bash
 rm -rf ~/.claude/skills/{orchestrate,orchestrator-delegation,delegate-prompts,tdd-protocol,workflow-patterns,validation-and-evidence,context-and-state,familiarize}
-rm -f ~/.claude/agents/{implementer,researcher,validator}.md
+rm -f ~/.claude/agents/{implementer,researcher,validator,ops,visual-check}.md
 ```
 
 ## License

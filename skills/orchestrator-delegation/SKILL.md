@@ -47,7 +47,7 @@ Never assign the top-tier model to work a mid-tier model can pass, and never ass
 
 Custom subagent definitions are markdown files with YAML frontmatter:
 
-- **User-level** (all projects): `~/.claude/agents/<name>.md` — an operating layer like this one typically ships three starter agents: `implementer`, `validator`, `researcher`
+- **User-level** (all projects): `~/.claude/agents/<name>.md` — this operating layer ships five: `implementer`, `validator`, `researcher`, `ops`, `visual-check`. Each lists only the tools it needs in `tools:`. Leave that line out and the agent gets every tool, whose descriptions (plus the skill list) load into every call it makes, so an all-tools agent starts at several times the context of a tool-limited one
 - **Project-level**: `.claude/agents/<name>.md` (discovered by walking up from cwd)
 - **Per-session**: `claude --agents '<json>'` (inline agent definitions)
 

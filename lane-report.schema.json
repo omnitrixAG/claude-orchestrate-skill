@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "summary", "files_changed", "test_command", "test_result", "acceptance_criteria", "unknowns"],
+  "properties": {
+    "status": { "type": "string", "enum": ["pass", "fail", "blocked"] },
+    "summary": { "type": "string" },
+    "files_changed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "test_command": { "type": "string" },
+    "test_result": { "type": "string", "enum": ["passed", "failed", "skipped"] },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "passed", "evidence"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^AC[1-5]$" },
+          "passed": { "type": "boolean" },
+          "evidence": { "type": "string" }
+        }
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "unknowns": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
